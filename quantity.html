@@ -1,0 +1,1279 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgriMandi - Selling Details</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+            min-height: 100vh;
+            background: #f4f8f3;
+            color: #333;
+        }
+
+
+        /* ================================
+           HEADER
+        ================================= */
+
+        header {
+
+            background: #2e7d32;
+            color: white;
+
+            padding: 15px 6%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            box-shadow:
+                0 3px 10px rgba(0, 0, 0, 0.15);
+
+        }
+
+
+        .logo {
+            font-size: 26px;
+            font-weight: bold;
+        }
+
+
+        .farmer-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            text-align: right;
+        }
+
+
+        .farmer-details {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+
+        .profile-icon {
+
+            width: 40px;
+            height: 40px;
+
+            background: white;
+            color: #2e7d32;
+
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-size: 21px;
+        }
+
+
+        /* ================================
+           MAIN
+        ================================= */
+
+        .container {
+
+            width: 90%;
+            max-width: 800px;
+
+            margin: 40px auto;
+
+        }
+
+
+        /* ================================
+           PROGRESS BAR
+        ================================= */
+
+        .progress {
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            margin-bottom: 35px;
+
+        }
+
+
+        .step {
+
+            display: flex;
+
+            align-items: center;
+
+        }
+
+
+        .circle {
+
+            width: 35px;
+            height: 35px;
+
+            border-radius: 50%;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            background: #2e7d32;
+
+            color: white;
+
+            font-weight: bold;
+
+        }
+
+
+        .line {
+
+            width: 80px;
+            height: 3px;
+
+            background: #2e7d32;
+
+        }
+
+
+        .step-label {
+
+            font-size: 11px;
+
+            color: #666;
+
+            margin-left: 7px;
+
+        }
+
+
+        /* ================================
+           CARD
+        ================================= */
+
+        .card {
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 16px;
+
+            box-shadow:
+                0 5px 20px
+                rgba(0, 0, 0, 0.09);
+
+        }
+
+
+        .card h1 {
+
+            color: #1b5e20;
+
+            font-size: 27px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .description {
+
+            color: #777;
+
+            font-size: 14px;
+
+            margin-bottom: 28px;
+
+        }
+
+
+        /* ================================
+           SELECTED CROP
+        ================================= */
+
+        .crop-box {
+
+            background: #e8f5e9;
+
+            border-left: 5px solid #2e7d32;
+
+            padding: 17px;
+
+            border-radius: 8px;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .crop-box span {
+
+            color: #1b5e20;
+
+            font-size: 19px;
+
+            font-weight: bold;
+
+        }
+
+
+        /* ================================
+           FORM
+        ================================= */
+
+        .form-group {
+
+            margin-bottom: 22px;
+
+        }
+
+
+        label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+
+            color: #333;
+
+        }
+
+
+        input,
+        select {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 8px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            background: white;
+
+        }
+
+
+        input:focus,
+        select:focus {
+
+            border-color: #2e7d32;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(46, 125, 50, 0.1);
+
+        }
+
+
+        /* ================================
+           QUANTITY
+        ================================= */
+
+        .quantity-box {
+
+            display: flex;
+
+            gap: 10px;
+
+        }
+
+
+        .quantity-box input {
+
+            flex: 1;
+
+        }
+
+
+        .quantity-box select {
+
+            width: 140px;
+
+        }
+
+
+        /* ================================
+           LOCATION
+        ================================= */
+
+        .location-box {
+
+            display: flex;
+
+            gap: 8px;
+
+        }
+
+
+        .location-box input {
+
+            flex: 1;
+
+        }
+
+
+        .location-btn {
+
+            width: 55px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #388e3c;
+
+            color: white;
+
+            font-size: 20px;
+
+            cursor: pointer;
+
+        }
+
+
+        .location-btn:hover {
+
+            background: #1b5e20;
+
+        }
+
+
+        .location-status {
+
+            margin-top: 8px;
+
+            font-size: 13px;
+
+        }
+
+
+        .success {
+
+            color: #2e7d32;
+
+        }
+
+
+        .error {
+
+            color: #d32f2f;
+
+        }
+
+
+        /* ================================
+           INFO BOX
+        ================================= */
+
+        .info-box {
+
+            background: #fff8e1;
+
+            border-left: 4px solid #f9a825;
+
+            padding: 15px;
+
+            border-radius: 7px;
+
+            margin-top: 5px;
+
+            margin-bottom: 25px;
+
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            color: #666;
+
+        }
+
+
+        /* ================================
+           BUTTONS
+        ================================= */
+
+        .buttons {
+
+            display: flex;
+
+            gap: 12px;
+
+            margin-top: 10px;
+
+        }
+
+
+        .back-btn,
+        .continue-btn {
+
+            flex: 1;
+
+            padding: 14px;
+
+            border-radius: 8px;
+
+            font-size: 15px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+        }
+
+
+        .back-btn {
+
+            background: white;
+
+            color: #2e7d32;
+
+            border: 1px solid #2e7d32;
+
+        }
+
+
+        .back-btn:hover {
+
+            background: #f1f8e9;
+
+        }
+
+
+        .continue-btn {
+
+            background: #2e7d32;
+
+            color: white;
+
+            border: none;
+
+        }
+
+
+        .continue-btn:hover {
+
+            background: #1b5e20;
+
+        }
+
+
+        /* ================================
+           FOOTER
+        ================================= */
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            color: #888;
+
+            font-size: 12px;
+
+        }
+
+
+        /* ================================
+           MOBILE
+        ================================= */
+
+        @media (max-width: 600px) {
+
+            header {
+
+                padding: 14px 5%;
+
+            }
+
+
+            .logo {
+
+                font-size: 21px;
+
+            }
+
+
+            .farmer-details {
+
+                font-size: 11px;
+
+            }
+
+
+            .card {
+
+                padding: 25px 20px;
+
+            }
+
+
+            .quantity-box {
+
+                flex-direction: column;
+
+            }
+
+
+            .quantity-box select {
+
+                width: 100%;
+
+            }
+
+
+            .location-box {
+
+                flex-direction: column;
+
+            }
+
+
+            .location-btn {
+
+                width: 100%;
+
+                padding: 12px;
+
+            }
+
+
+            .buttons {
+
+                flex-direction: column;
+
+            }
+
+
+            .line {
+
+                width: 35px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =================================
+         HEADER
+    ================================== -->
+
+    <header>
+
+        <div class="logo">
+            🌱 AgriMandi
+        </div>
+
+
+        <div class="farmer-info">
+
+            <div class="farmer-details">
+
+                <strong id="farmerName">
+                    Farmer
+                </strong>
+
+                <br>
+
+                📍
+                <span id="farmerLocation">
+                    Location
+                </span>
+
+            </div>
+
+
+            <div class="profile-icon">
+                👨‍🌾
+            </div>
+
+        </div>
+
+    </header>
+
+
+
+    <!-- =================================
+         MAIN
+    ================================== -->
+
+    <main class="container">
+
+
+        <!-- Progress -->
+
+        <div class="progress">
+
+            <div class="step">
+
+                <div class="circle">
+                    ✓
+                </div>
+
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <div class="step">
+
+                <div class="circle">
+                    2
+                </div>
+
+            </div>
+
+
+            <div class="line"></div>
+
+
+            <div class="step">
+
+                <div class="circle">
+                    3
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- =================================
+             CARD
+        ================================== -->
+
+        <div class="card">
+
+
+            <h1>
+                Enter Selling Details
+            </h1>
+
+
+            <p class="description">
+
+                Provide your crop quantity and location.
+                We will use this information to calculate
+                transportation cost and compare mandi prices.
+
+            </p>
+
+
+
+            <!-- Selected Crop -->
+
+            <div class="crop-box">
+
+                🌾 Selected Crop:
+
+                <br>
+
+                <span id="selectedCrop">
+                    Loading...
+                </span>
+
+            </div>
+
+
+
+            <!-- =================================
+                 QUANTITY
+            ================================== -->
+
+            <div class="form-group">
+
+                <label for="quantity">
+
+                    Quantity of Crop
+
+                </label>
+
+
+                <div class="quantity-box">
+
+                    <input
+                        type="number"
+                        id="quantity"
+                        placeholder="Enter quantity"
+                        min="1"
+                        step="0.01"
+                        required
+                    >
+
+
+                    <select id="unit">
+
+                        <option value="kg">
+                            Kilogram (kg)
+                        </option>
+
+                        <option value="quintal">
+                            Quintal
+                        </option>
+
+                        <option value="ton">
+                            Ton
+                        </option>
+
+                    </select>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 FARMER LOCATION
+            ================================== -->
+
+            <div class="form-group">
+
+                <label for="farmerLocationInput">
+
+                    Your Current Location
+
+                </label>
+
+
+                <div class="location-box">
+
+                    <input
+                        type="text"
+                        id="farmerLocationInput"
+                        placeholder="Village / Town / District"
+                        required
+                    >
+
+
+                    <button
+                        type="button"
+                        class="location-btn"
+                        onclick="getLocation()"
+                        title="Detect current location"
+                    >
+
+                        📍
+
+                    </button>
+
+                </div>
+
+
+                <div
+                    id="locationStatus"
+                    class="location-status"
+                ></div>
+
+            </div>
+
+
+
+            <!-- =================================
+                 MANDI LOCATION
+            ================================== -->
+
+            <div class="form-group">
+
+                <label for="mandiArea">
+
+                    Preferred Mandi Area
+
+                </label>
+
+
+                <input
+                    type="text"
+                    id="mandiArea"
+                    placeholder="Example: Nashik, Pune, Ahmednagar"
+                    required
+                >
+
+            </div>
+
+
+
+            <!-- =================================
+                 INFORMATION
+            ================================== -->
+
+            <div class="info-box">
+
+                🚚 <strong>Why do we need your location?</strong>
+
+                <br>
+
+                Your location will help us estimate the
+                distance to different mandis and calculate
+                the approximate transportation cost.
+
+                <br><br>
+
+                💰 We will then compare:
+
+                <br>
+
+                <strong>
+                    Mandi Price − Transportation Cost − Charges
+                </strong>
+
+                to help you identify the mandi where
+                you may receive the best net return.
+
+            </div>
+
+
+
+            <!-- =================================
+                 BUTTONS
+            ================================== -->
+
+            <div class="buttons">
+
+
+                <button
+                    type="button"
+                    class="back-btn"
+                    onclick="goBack()"
+                >
+
+                    ← Back
+
+                </button>
+
+
+                <button
+                    type="button"
+                    class="continue-btn"
+                    onclick="submitDetails()"
+                >
+
+                    Compare Mandi Prices →
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        © 2026 AgriMandi |
+        Smart Mandi Price Comparison Platform
+
+    </footer>
+
+
+
+    <!-- =================================
+         JAVASCRIPT
+    ================================== -->
+
+    <script>
+
+
+        /* =================================
+           LOAD FARMER + CROP
+        ================================= */
+
+        window.onload = function() {
+
+
+            /* Get farmer information */
+
+            const farmerData =
+                localStorage.getItem(
+                    "farmerData"
+                );
+
+
+            if (farmerData) {
+
+                const farmer =
+                    JSON.parse(farmerData);
+
+
+                document.getElementById(
+                    "farmerName"
+                ).innerText =
+                    farmer.name || "Farmer";
+
+
+                document.getElementById(
+                    "farmerLocation"
+                ).innerText =
+                    farmer.location || "Location";
+
+
+                /*
+                    Put saved location
+                    into location input
+                */
+
+                document.getElementById(
+                    "farmerLocationInput"
+                ).value =
+                    farmer.location || "";
+
+            }
+
+
+            /* Get selected crop */
+
+            const crop =
+                localStorage.getItem(
+                    "selectedCrop"
+                );
+
+
+            if (crop) {
+
+                document.getElementById(
+                    "selectedCrop"
+                ).innerText = crop;
+
+            }
+
+            else {
+
+                document.getElementById(
+                    "selectedCrop"
+                ).innerText =
+                    "No crop selected";
+
+            }
+
+        };
+
+
+
+        /* =================================
+           GET GPS LOCATION
+        ================================= */
+
+        function getLocation() {
+
+
+            const status =
+                document.getElementById(
+                    "locationStatus"
+                );
+
+
+            if (!navigator.geolocation) {
+
+                status.innerText =
+                    "❌ Geolocation is not supported.";
+
+                status.className =
+                    "location-status error";
+
+                return;
+
+            }
+
+
+            status.innerText =
+                "📍 Detecting your location...";
+
+            status.className =
+                "location-status";
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function(position) {
+
+
+                    const latitude =
+                        position.coords.latitude;
+
+
+                    const longitude =
+                        position.coords.longitude;
+
+
+                    /*
+                        Store coordinates separately.
+
+                        Later the backend/API can use
+                        these coordinates to calculate
+                        actual road distance to mandis.
+                    */
+
+                    localStorage.setItem(
+                        "farmerLatitude",
+                        latitude
+                    );
+
+
+                    localStorage.setItem(
+                        "farmerLongitude",
+                        longitude
+                    );
+
+
+                    /*
+                        Display coordinates
+                    */
+
+                    document.getElementById(
+                        "farmerLocationInput"
+                    ).value =
+
+                        latitude.toFixed(6)
+                        + ", "
+                        + longitude.toFixed(6);
+
+
+                    status.innerText =
+                        "✓ Location detected successfully.";
+
+                    status.className =
+                        "location-status success";
+
+                },
+
+
+                function() {
+
+                    status.innerText =
+                        "❌ Location access denied. Enter location manually.";
+
+                    status.className =
+                        "location-status error";
+
+                }
+
+            );
+
+        }
+
+
+
+        /* =================================
+           SUBMIT SELLING DETAILS
+        ================================= */
+
+        function submitDetails() {
+
+
+            const crop =
+                localStorage.getItem(
+                    "selectedCrop"
+                );
+
+
+            const quantity =
+                document.getElementById(
+                    "quantity"
+                ).value;
+
+
+            const unit =
+                document.getElementById(
+                    "unit"
+                ).value;
+
+
+            const location =
+                document.getElementById(
+                    "farmerLocationInput"
+                ).value.trim();
+
+
+            const mandiArea =
+                document.getElementById(
+                    "mandiArea"
+                ).value.trim();
+
+
+
+            /* Validate crop */
+
+            if (!crop) {
+
+                alert(
+                    "Please select a crop first."
+                );
+
+                window.location.href =
+                    "dashboard.html";
+
+                return;
+
+            }
+
+
+
+            /* Validate quantity */
+
+            if (
+                quantity === "" ||
+                Number(quantity) <= 0
+            ) {
+
+                alert(
+                    "Please enter a valid crop quantity."
+                );
+
+                return;
+
+            }
+
+
+
+            /* Validate location */
+
+            if (location === "") {
+
+                alert(
+                    "Please enter your location."
+                );
+
+                return;
+
+            }
+
+
+
+            /* Validate mandi area */
+
+            if (mandiArea === "") {
+
+                alert(
+                    "Please enter a preferred mandi area."
+                );
+
+                return;
+
+            }
+
+
+
+            /* =================================
+               SAVE SELLING DETAILS
+            ================================= */
+
+
+            const sellingDetails = {
+
+                crop: crop,
+
+                quantity: Number(quantity),
+
+                unit: unit,
+
+                farmerLocation: location,
+
+                mandiArea: mandiArea,
+
+                latitude:
+                    localStorage.getItem(
+                        "farmerLatitude"
+                    ),
+
+                longitude:
+                    localStorage.getItem(
+                        "farmerLongitude"
+                    )
+
+            };
+
+
+            localStorage.setItem(
+
+                "sellingDetails",
+
+                JSON.stringify(
+                    sellingDetails
+                )
+
+            );
+
+
+
+            /* Success */
+
+            alert(
+                "✓ Selling details saved successfully!"
+            );
+
+
+
+            /* =================================
+               GO TO PAGE 4
+            ================================= */
+
+            window.location.href =
+                "mandiprice.html";
+
+        }
+
+
+
+        /* =================================
+           BACK
+        ================================= */
+
+        function goBack() {
+
+            window.location.href =
+                "dashboard.html";
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

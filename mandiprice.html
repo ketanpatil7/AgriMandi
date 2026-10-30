@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgriMandi - Mandi Prices</title>
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f3f8f2;
+            color: #333;
+        }
+
+        /* Header */
+
+        header {
+            background: #2e7d32;
+            color: white;
+            padding: 18px 7%;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 27px;
+            font-weight: bold;
+        }
+
+        .farmer {
+            font-size: 14px;
+        }
+
+
+        /* Main */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 35px auto;
+        }
+
+        .title {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .title h1 {
+            color: #1b5e20;
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .title p {
+            color: #666;
+        }
+
+
+        /* Farmer Information */
+
+        .crop-info {
+            background: white;
+            padding: 18px 25px;
+            border-radius: 12px;
+
+            display: flex;
+            justify-content: space-around;
+
+            margin-bottom: 30px;
+
+            box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+        }
+
+        .info-box {
+            text-align: center;
+        }
+
+        .info-box span {
+            display: block;
+            color: #777;
+            font-size: 13px;
+            margin-bottom: 5px;
+        }
+
+        .info-box strong {
+            color: #1b5e20;
+            font-size: 17px;
+        }
+
+
+        /* Mandi Grid */
+
+        .mandi-container {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(330px, 1fr));
+
+            gap: 25px;
+        }
+
+
+        /* Mandi Card */
+
+        .mandi-card {
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 25px;
+
+            box-shadow:
+                0 5px 18px rgba(0,0,0,0.09);
+
+            border: 2px solid transparent;
+
+            transition: 0.3s;
+        }
+
+        .mandi-card:hover {
+            transform: translateY(-5px);
+        }
+
+
+        /* Best Mandi */
+
+        .best {
+            border-color: #43a047;
+        }
+
+        .best-tag {
+            background: #2e7d32;
+            color: white;
+
+            display: inline-block;
+
+            padding: 5px 10px;
+
+            border-radius: 15px;
+
+            font-size: 11px;
+
+            margin-bottom: 10px;
+        }
+
+
+        /* Mandi Name */
+
+        .mandi-name {
+            color: #1b5e20;
+            font-size: 23px;
+            font-weight: bold;
+
+            margin-bottom: 5px;
+        }
+
+        .mandi-location {
+            color: #777;
+            font-size: 13px;
+
+            margin-bottom: 20px;
+        }
+
+
+        /* Price Rows */
+
+        .price-row {
+
+            display: flex;
+
+            justify-content: space-between;
+
+            padding: 11px 0;
+
+            border-bottom: 1px solid #eee;
+
+            font-size: 14px;
+        }
+
+        .price {
+            font-weight: bold;
+        }
+
+        .best-price {
+            color: #2e7d32;
+        }
+
+        .medium-price {
+            color: #ef6c00;
+        }
+
+        .average-price {
+            color: #777;
+        }
+
+
+        /* Charges */
+
+        .charges {
+
+            background: #f8f8f8;
+
+            padding: 12px;
+
+            border-radius: 8px;
+
+            margin-top: 15px;
+        }
+
+        .transport {
+            color: #d84315;
+        }
+
+
+        /* Net Amount */
+
+        .net {
+
+            margin-top: 15px;
+
+            padding: 15px;
+
+            background: #e8f5e9;
+
+            border-radius: 10px;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+        }
+
+        .net span {
+            color: #555;
+            font-size: 14px;
+        }
+
+        .net strong {
+            color: #1b5e20;
+            font-size: 22px;
+        }
+
+
+        /* Buttons */
+
+        .buttons {
+
+            text-align: center;
+
+            margin-top: 35px;
+        }
+
+        button {
+
+            padding: 12px 25px;
+
+            border-radius: 8px;
+
+            border: none;
+
+            font-size: 15px;
+
+            cursor: pointer;
+
+            margin: 5px;
+        }
+
+        .back {
+            background: white;
+            color: #2e7d32;
+            border: 1px solid #2e7d32;
+        }
+
+        .help {
+            background: #2e7d32;
+            color: white;
+        }
+
+
+        /* Responsive */
+
+        @media (max-width: 600px) {
+
+            .crop-info {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .mandi-container {
+                grid-template-columns: 1fr;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header>
+
+        <div class="logo">
+            🌱 AgriMandi
+        </div>
+
+        <div class="farmer">
+            👨‍🌾 Farmer: Ketan Patil
+        </div>
+
+    </header>
+
+
+
+    <!-- MAIN -->
+
+    <div class="container">
+
+
+        <!-- TITLE -->
+
+        <div class="title">
+
+            <h1>
+                Mandi Price Comparison
+            </h1>
+
+            <p>
+                Compare prices and charges before selling your crop
+            </p>
+
+        </div>
+
+
+
+        <!-- CROP INFORMATION -->
+
+        <div class="crop-info">
+
+            <div class="info-box">
+
+                <span>Selected Crop</span>
+
+                <strong>Onion</strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span>Quantity</span>
+
+                <strong>50 Quintal</strong>
+
+            </div>
+
+
+            <div class="info-box">
+
+                <span>Farmer Location</span>
+
+                <strong>Pimpalgaon</strong>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- MANDIS -->
+
+        <div class="mandi-container">
+
+
+            <!-- MANDI 1 -->
+
+            <div class="mandi-card best">
+
+                <span class="best-tag">
+                    🏆 BEST MANDI
+                </span>
+
+                <div class="mandi-name">
+                    Lasalgaon Mandi
+                </div>
+
+                <div class="mandi-location">
+                    📍 Lasalgaon, Nashik
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>
+                        🟢 Best Quality
+                    </span>
+
+                    <span class="price best-price">
+                        ₹3,250 / Quintal
+                    </span>
+
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>
+                        🟡 Medium Quality
+                    </span>
+
+                    <span class="price medium-price">
+                        ₹2,900 / Quintal
+                    </span>
+
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>
+                        ⚪ Average Quality
+                    </span>
+
+                    <span class="price average-price">
+                        ₹2,550 / Quintal
+                    </span>
+
+                </div>
+
+
+                <div class="charges">
+
+                    <div class="price-row">
+
+                        <span>
+                            Unloading Charges
+                        </span>
+
+                        <span>
+                            ₹700
+                        </span>
+
+                    </div>
+
+
+                    <div class="price-row">
+
+                        <span>
+                            🚚 Transport Cost
+                        </span>
+
+                        <span class="transport">
+                            ₹840
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="net">
+
+                    <span>
+                        Estimated Net Amount
+                    </span>
+
+                    <strong>
+                        ₹1,60,960
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MANDI 2 -->
+
+            <div class="mandi-card">
+
+                <div class="mandi-name">
+                    Pimpalgaon Mandi
+                </div>
+
+                <div class="mandi-location">
+                    📍 Pimpalgaon, Nashik
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>
+                        🟢 Best Quality
+                    </span>
+
+                    <span class="price best-price">
+                        ₹3,000 / Quintal
+                    </span>
+
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>
+                        🟡 Medium Quality
+                    </span>
+
+                    <span class="price medium-price">
+                        ₹2,700 / Quintal
+                    </span>
+
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>
+                        ⚪ Average Quality
+                    </span>
+
+                    <span class="price average-price">
+                        ₹2,400 / Quintal
+                    </span>
+
+                </div>
+
+
+                <div class="charges">
+
+                    <div class="price-row">
+
+                        <span>
+                            Unloading Charges
+                        </span>
+
+                        <span>
+                            ₹500
+                        </span>
+
+                    </div>
+
+
+                    <div class="price-row">
+
+                        <span>
+                            🚚 Transport Cost
+                        </span>
+
+                        <span class="transport">
+                            ₹240
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="net">
+
+                    <span>
+                        Estimated Net Amount
+                    </span>
+
+                    <strong>
+                        ₹1,49,260
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- MANDI 3 -->
+
+            <div class="mandi-card">
+
+                <div class="mandi-name">
+                    Nashik Mandi
+                </div>
+
+                <div class="mandi-location">
+                    📍 Nashik, Maharashtra
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>
+                        🟢 Best Quality
+                    </span>
+
+                    <span class="price best-price">
+                        ₹3,150 / Quintal
+                    </span>
+
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>
+                        🟡 Medium Quality
+                    </span>
+
+                    <span class="price medium-price">
+                        ₹2,800 / Quintal
+                    </span>
+
+                </div>
+
+
+                <div class="price-row">
+
+                    <span>
+                        ⚪ Average Quality
+                    </span>
+
+                    <span class="price average-price">
+                        ₹2,500 / Quintal
+                    </span>
+
+                </div>
+
+
+                <div class="charges">
+
+                    <div class="price-row">
+
+                        <span>
+                            Unloading Charges
+                        </span>
+
+                        <span>
+                            ₹600
+                        </span>
+
+                    </div>
+
+
+                    <div class="price-row">
+
+                        <span>
+                            🚚 Transport Cost
+                        </span>
+
+                        <span class="transport">
+                            ₹1,100
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="net">
+
+                    <span>
+                        Estimated Net Amount
+                    </span>
+
+                    <strong>
+                        ₹1,55,800
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- BUTTONS -->
+
+        <div class="buttons">
+
+            <button class="back" onclick="window.location.href='quantity.html'">
+                ← Change Details
+            </button>
+
+            <button class="help" onclick="window.location.href='helpdesk.html'">
+                🛡️ Help Desk
+            </button>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+
+</html>

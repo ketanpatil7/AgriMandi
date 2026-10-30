@@ -1,0 +1,1667 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>AgriMandi - Farmer Dashboard</title>
+
+
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+
+        body {
+
+            min-height: 100vh;
+
+            background: #f4f8f3;
+
+            color: #333;
+
+        }
+
+
+        /* =====================================
+           HEADER
+        ===================================== */
+
+        header {
+
+            background: #2e7d32;
+
+            color: white;
+
+            padding: 15px 6%;
+
+            display: flex;
+
+            justify-content: space-between;
+
+            align-items: center;
+
+            box-shadow:
+                0 3px 10px
+                rgba(0, 0, 0, 0.15);
+
+        }
+
+
+        .logo {
+
+            font-size: 26px;
+
+            font-weight: bold;
+
+        }
+
+
+        .farmer-info {
+
+            display: flex;
+
+            align-items: center;
+
+            gap: 15px;
+
+            text-align: right;
+
+        }
+
+
+        .farmer-details {
+
+            font-size: 14px;
+
+            line-height: 1.5;
+
+        }
+
+
+        .profile-icon {
+
+            width: 42px;
+
+            height: 42px;
+
+            background: white;
+
+            color: #2e7d32;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 22px;
+
+        }
+
+        /* Added style for helpdesk link */
+        .helpdesk-link {
+            color: rgb(193, 219, 142);
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            background: rgba(244, 246, 243, 0.2);
+            padding: 6px 12px;
+            border-radius: 5px;
+            transition: background 0.2s;
+        }
+
+        .helpdesk-link:hover {
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+
+        /* =====================================
+           MAIN CONTAINER
+        ===================================== */
+
+        .container {
+
+            width: 88%;
+
+            max-width: 1250px;
+
+            margin: 35px auto;
+
+        }
+
+
+        /* =====================================
+           WELCOME SECTION
+        ===================================== */
+
+        .welcome {
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .welcome h1 {
+
+            color: #1b5e20;
+
+            font-size: 30px;
+
+            margin-bottom: 8px;
+
+        }
+
+
+        .welcome p {
+
+            color: #666;
+
+            font-size: 15px;
+
+        }
+
+
+        /* =====================================
+           SEARCH
+        ===================================== */
+
+        .search-container {
+
+            position: relative;
+
+            margin-bottom: 25px;
+
+        }
+
+
+        .search-icon {
+
+            position: absolute;
+
+            left: 15px;
+
+            top: 50%;
+
+            transform: translateY(-50%);
+
+            font-size: 19px;
+
+            color: #777;
+
+        }
+
+
+        #searchCrop {
+
+            width: 100%;
+
+            padding: 15px 45px;
+
+            border: 1px solid #ccc;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            background: white;
+
+        }
+
+
+        #searchCrop:focus {
+
+            border-color: #2e7d32;
+
+            box-shadow:
+                0 0 0 2px
+                rgba(46, 125, 50, 0.1);
+
+        }
+
+
+        /* =====================================
+           CATEGORY BUTTONS
+        ===================================== */
+
+        .categories {
+
+            display: flex;
+
+            gap: 10px;
+
+            flex-wrap: wrap;
+
+            margin-bottom: 30px;
+
+        }
+
+
+        .category-btn {
+
+            padding: 9px 18px;
+
+            border: 1px solid #2e7d32;
+
+            border-radius: 20px;
+
+            background: white;
+
+            color: #2e7d32;
+
+            cursor: pointer;
+
+            font-size: 13px;
+
+            transition: 0.2s;
+
+        }
+
+
+        .category-btn:hover,
+        .category-btn.active {
+
+            background: #2e7d32;
+
+            color: white;
+
+        }
+
+
+        /* =====================================
+           CROP GRID
+        ===================================== */
+
+        .crop-grid {
+
+            display: grid;
+
+            grid-template-columns:
+                repeat(
+                    auto-fit,
+                    minmax(190px, 1fr)
+                );
+
+            gap: 22px;
+
+        }
+
+
+        /* =====================================
+           CROP CARD
+        ===================================== */
+
+        .crop-card {
+
+            background: white;
+
+            border-radius: 15px;
+
+            padding: 25px 18px;
+
+            text-align: center;
+
+            box-shadow:
+                0 4px 15px
+                rgba(0, 0, 0, 0.08);
+
+            transition: 0.3s;
+
+            border: 2px solid transparent;
+
+        }
+
+
+        .crop-card:hover {
+
+            transform: translateY(-5px);
+
+            box-shadow:
+                0 8px 22px
+                rgba(0, 0, 0, 0.12);
+
+            border-color: #a5d6a7;
+
+        }
+
+
+        .crop-icon {
+
+            width: 85px;
+
+            height: 85px;
+
+            margin: auto;
+
+            background: #f1f8e9;
+
+            border-radius: 50%;
+
+            display: flex;
+
+            justify-content: center;
+
+            align-items: center;
+
+            font-size: 48px;
+
+            margin-bottom: 15px;
+
+        }
+
+
+        .crop-card h3 {
+
+            color: #333;
+
+            font-size: 18px;
+
+            margin-bottom: 6px;
+
+        }
+
+
+        .crop-category {
+
+            font-size: 12px;
+
+            color: #888;
+
+            margin-bottom: 16px;
+
+        }
+
+
+        .select-btn {
+
+            width: 100%;
+
+            padding: 11px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2e7d32;
+
+            color: white;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+
+        }
+
+
+        .select-btn:hover {
+
+            background: #1b5e20;
+
+        }
+
+
+        /* =====================================
+           SELECTED CROP
+        ===================================== */
+
+        .selected-crop {
+
+            display: none;
+
+            margin-top: 35px;
+
+            background: #e8f5e9;
+
+            border-left: 5px solid #2e7d32;
+
+            padding: 20px;
+
+            border-radius: 10px;
+
+        }
+
+
+        .selected-crop h3 {
+
+            color: #1b5e20;
+
+            margin-bottom: 7px;
+
+        }
+
+
+        .continue-btn {
+
+            margin-top: 15px;
+
+            padding: 11px 22px;
+
+            background: #2e7d32;
+
+            color: white;
+
+            border: none;
+
+            border-radius: 7px;
+
+            cursor: pointer;
+
+            font-weight: bold;
+
+        }
+
+
+        .continue-btn:hover {
+
+            background: #1b5e20;
+
+        }
+
+
+        /* =====================================
+           NO RESULT
+        ===================================== */
+
+        .no-result {
+
+            display: none;
+
+            text-align: center;
+
+            padding: 40px;
+
+            color: #777;
+
+            font-size: 16px;
+
+        }
+
+
+        /* =====================================
+           FOOTER
+        ===================================== */
+
+        footer {
+
+            text-align: center;
+
+            padding: 25px;
+
+            color: #888;
+
+            font-size: 12px;
+
+        }
+
+
+        /* =====================================
+           RESPONSIVE
+        ===================================== */
+
+        @media (max-width: 650px) {
+
+            header {
+
+                padding: 14px 5%;
+
+            }
+
+
+            .logo {
+
+                font-size: 21px;
+
+            }
+
+
+            .farmer-details {
+
+                font-size: 12px;
+
+            }
+
+
+            .profile-icon {
+
+                width: 36px;
+
+                height: 36px;
+
+                font-size: 18px;
+
+            }
+
+
+            .container {
+
+                width: 90%;
+
+            }
+
+
+            .welcome h1 {
+
+                font-size: 25px;
+
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================
+         HEADER
+    ===================================== -->
+
+    <header>
+
+
+        <div class="logo">
+
+            🌱 AgriMandi
+
+        </div>
+
+
+        <div class="farmer-info">
+
+            <!-- Link to Helpdesk Added Here -->
+            <a href="helpdesk.html" class="helpdesk-link">🛡️Help Desk </a>
+
+            <div class="farmer-details">
+
+                <strong id="farmerName">
+                    Farmer
+                </strong>
+
+                <br>
+
+                📍 <span id="farmerLocation">
+                    Location
+                </span>
+
+            </div>
+
+
+            <div class="profile-icon">
+
+                👨‍🌾
+
+            </div>
+
+
+        </div>
+
+
+    </header>
+
+
+
+    <!-- =====================================
+         MAIN
+    ===================================== -->
+
+    <main class="container">
+
+
+        <!-- Welcome -->
+
+        <section class="welcome">
+
+            <h1>
+
+                Select Your Crop 🌾
+
+            </h1>
+
+
+            <p>
+
+                Select the crop you want to sell
+                in the mandi.
+
+            </p>
+
+        </section>
+
+
+
+        <!-- =================================
+             SEARCH
+        ================================== -->
+
+        <div class="search-container">
+
+            <span class="search-icon">
+                🔍
+            </span>
+
+
+            <input
+                type="text"
+                id="searchCrop"
+                placeholder="Search for a crop..."
+                onkeyup="searchCrop()"
+            >
+
+        </div>
+
+
+
+        <!-- =================================
+             CATEGORIES
+        ================================== -->
+
+        <div class="categories">
+
+
+            <button
+                class="category-btn active"
+                onclick="filterCategory('all', this)"
+            >
+
+                All Crops
+
+            </button>
+
+
+            <button
+                class="category-btn"
+                onclick="filterCategory('cereal', this)"
+            >
+
+                🌾 Cereals
+
+            </button>
+
+
+            <button
+                class="category-btn"
+                onclick="filterCategory('vegetable', this)"
+            >
+
+                🥕 Vegetables
+
+            </button>
+
+
+            <button
+                class="category-btn"
+                onclick="filterCategory('fruit', this)"
+            >
+
+                🍎 Fruits
+
+            </button>
+
+
+            <button
+                class="category-btn"
+                onclick="filterCategory('pulse', this)"
+            >
+
+                🌱 Pulses
+
+            </button>
+
+
+            <button
+                class="category-btn"
+                onclick="filterCategory('cash', this)"
+            >
+
+                💰 Cash Crops
+
+            </button>
+
+
+        </div>
+
+
+
+        <!-- =================================
+             CROP CARDS
+        ================================== -->
+
+        <div
+            class="crop-grid"
+            id="cropGrid"
+        >
+
+
+            <!-- Wheat -->
+
+            <div
+                class="crop-card"
+                data-name="wheat"
+                data-category="cereal"
+            >
+
+                <div class="crop-icon">
+                    🌾
+                </div>
+
+                <h3>
+                    Wheat
+                </h3>
+
+                <div class="crop-category">
+                    Cereal
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Wheat')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Rice -->
+
+            <div
+                class="crop-card"
+                data-name="rice"
+                data-category="cereal"
+            >
+
+                <div class="crop-icon">
+                    🍚
+                </div>
+
+                <h3>
+                    Rice
+                </h3>
+
+                <div class="crop-category">
+                    Cereal
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Rice')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Maize -->
+
+            <div
+                class="crop-card"
+                data-name="maize corn"
+                data-category="cereal"
+            >
+
+                <div class="crop-icon">
+                    🌽
+                </div>
+
+                <h3>
+                    Maize
+                </h3>
+
+                <div class="crop-category">
+                    Cereal
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Maize')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Onion -->
+
+            <div
+                class="crop-card"
+                data-name="onion"
+                data-category="vegetable"
+            >
+
+                <div class="crop-icon">
+                    🧅
+                </div>
+
+                <h3>
+                    Onion
+                </h3>
+
+                <div class="crop-category">
+                    Vegetable
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Onion')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Tomato -->
+
+            <div
+                class="crop-card"
+                data-name="tomato"
+                data-category="vegetable"
+            >
+
+                <div class="crop-icon">
+                    🍅
+                </div>
+
+                <h3>
+                    Tomato
+                </h3>
+
+                <div class="crop-category">
+                    Vegetable
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Tomato')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Potato -->
+
+            <div
+                class="crop-card"
+                data-name="potato"
+                data-category="vegetable"
+            >
+
+                <div class="crop-icon">
+                    🥔
+                </div>
+
+                <h3>
+                    Potato
+                </h3>
+
+                <div class="crop-category">
+                    Vegetable
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Potato')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Chilli -->
+
+            <div
+                class="crop-card"
+                data-name="chilli chili"
+                data-category="vegetable"
+            >
+
+                <div class="crop-icon">
+                    🌶️
+                </div>
+
+                <h3>
+                    Chilli
+                </h3>
+
+                <div class="crop-category">
+                    Vegetable
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Chilli')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Carrot -->
+
+            <div
+                class="crop-card"
+                data-name="carrot"
+                data-category="vegetable"
+            >
+
+                <div class="crop-icon">
+                    🥕
+                </div>
+
+                <h3>
+                    Carrot
+                </h3>
+
+                <div class="crop-category">
+                    Vegetable
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Carrot')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Grapes -->
+
+            <div
+                class="crop-card"
+                data-name="grapes grape"
+                data-category="fruit"
+            >
+
+                <div class="crop-icon">
+                    🍇
+                </div>
+
+                <h3>
+                    Grapes
+                </h3>
+
+                <div class="crop-category">
+                    Fruit
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Grapes')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Apple -->
+
+            <div
+                class="crop-card"
+                data-name="apple"
+                data-category="fruit"
+            >
+
+                <div class="crop-icon">
+                    🍎
+                </div>
+
+                <h3>
+                    Apple
+                </h3>
+
+                <div class="crop-category">
+                    Fruit
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Apple')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Banana -->
+
+            <div
+                class="crop-card"
+                data-name="banana"
+                data-category="fruit"
+            >
+
+                <div class="crop-icon">
+                    🍌
+                </div>
+
+                <h3>
+                    Banana
+                </h3>
+
+                <div class="crop-category">
+                    Fruit
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Banana')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Soybean -->
+
+            <div
+                class="crop-card"
+                data-name="soybean soya"
+                data-category="pulse"
+            >
+
+                <div class="crop-icon">
+                    🌱
+                </div>
+
+                <h3>
+                    Soybean
+                </h3>
+
+                <div class="crop-category">
+                    Pulse / Oilseed
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Soybean')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Gram -->
+
+            <div
+                class="crop-card"
+                data-name="gram chickpea chana"
+                data-category="pulse"
+            >
+
+                <div class="crop-icon">
+                    🫘
+                </div>
+
+                <h3>
+                    Gram
+                </h3>
+
+                <div class="crop-category">
+                    Pulse
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Gram')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Groundnut -->
+
+            <div
+                class="crop-card"
+                data-name="groundnut peanut"
+                data-category="cash"
+            >
+
+                <div class="crop-icon">
+                    🥜
+                </div>
+
+                <h3>
+                    Groundnut
+                </h3>
+
+                <div class="crop-category">
+                    Oilseed
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Groundnut')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Sugarcane -->
+
+            <div
+                class="crop-card"
+                data-name="sugarcane"
+                data-category="cash"
+            >
+
+                <div class="crop-icon">
+                    🎋
+                </div>
+
+                <h3>
+                    Sugarcane
+                </h3>
+
+                <div class="crop-category">
+                    Cash Crop
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Sugarcane')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+
+            <!-- Sunflower -->
+
+            <div
+                class="crop-card"
+                data-name="sunflower"
+                data-category="cash"
+            >
+
+                <div class="crop-icon">
+                    🌻
+                </div>
+
+                <h3>
+                    Sunflower
+                </h3>
+
+                <div class="crop-category">
+                    Oilseed
+                </div>
+
+                <button
+                    class="select-btn"
+                    onclick="selectCrop('Sunflower')"
+                >
+
+                    Select Crop
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- =================================
+             NO SEARCH RESULT
+        ================================== -->
+
+        <div
+            class="no-result"
+            id="noResult"
+        >
+
+            🔍 No crop found.
+
+            <br>
+
+            Try searching for another crop.
+
+        </div>
+
+
+
+        <!-- =================================
+             SELECTED CROP
+        ================================== -->
+
+        <div
+            class="selected-crop"
+            id="selectedCrop"
+        >
+
+            <h3>
+
+                ✓ Selected Crop:
+                <span id="selectedCropName"></span>
+
+            </h3>
+
+
+            <p>
+
+                Now enter the quantity you want
+                to sell and confirm your location.
+
+            </p>
+
+
+            <button
+                class="continue-btn"
+                onclick="continueToSellingDetails()"
+            >
+
+                Continue →
+
+            </button>
+
+        </div>
+
+
+    </main>
+
+
+
+    <!-- Footer -->
+
+    <footer>
+
+        © 2026 AgriMandi | Smart Support for Farmers
+
+    </footer>
+
+
+
+    <!-- =====================================
+         JAVASCRIPT
+    ===================================== -->
+
+    <script>
+
+
+        /* =====================================
+           LOAD FARMER INFORMATION
+        ===================================== */
+
+        window.onload = function() {
+
+            const farmerData =
+                localStorage.getItem("farmerData");
+
+
+            if (farmerData) {
+
+                const farmer =
+                    JSON.parse(farmerData);
+
+
+                document.getElementById(
+                    "farmerName"
+                ).innerText =
+                    farmer.name || "Farmer";
+
+
+                document.getElementById(
+                    "farmerLocation"
+                ).innerText =
+                    farmer.location || "Location";
+
+            }
+
+        };
+
+
+
+        /* =====================================
+           SELECTED CROP VARIABLE
+        ===================================== */
+
+        let selectedCrop = "";
+
+
+
+        /* =====================================
+           SELECT CROP
+        ===================================== */
+
+        function selectCrop(crop) {
+
+            selectedCrop = crop;
+
+
+            /*
+                Save selected crop
+                for Page 3
+            */
+
+            localStorage.setItem(
+                "selectedCrop",
+                crop
+            );
+
+
+            /*
+                Display selected crop
+            */
+
+            document.getElementById(
+                "selectedCropName"
+            ).innerText = crop;
+
+
+            document.getElementById(
+                "selectedCrop"
+            ).style.display = "block";
+
+
+            /*
+                Scroll to selected section
+            */
+
+            document.getElementById(
+                "selectedCrop"
+            ).scrollIntoView({
+                behavior: "smooth"
+            });
+
+        }
+
+
+
+        /* =====================================
+           CONTINUE TO PAGE 3
+        ===================================== */
+
+        function continueToSellingDetails() {
+
+            if (selectedCrop === "") {
+
+                alert(
+                    "Please select a crop first."
+                );
+
+                return;
+
+            }
+
+
+            /*
+                Page 3 file name:
+                selling-details.html
+            */
+
+            window.location.href =
+                "quantity.html";
+
+        }
+
+
+
+        /* =====================================
+           SEARCH CROP
+        ==================================== */
+
+        function searchCrop() {
+
+            const searchValue =
+                document
+                .getElementById("searchCrop")
+                .value
+                .toLowerCase()
+                .trim();
+
+
+            const cards =
+                document.querySelectorAll(
+                    ".crop-card"
+                );
+
+
+            let found = false;
+
+
+            cards.forEach(function(card) {
+
+                const cropName =
+                    card
+                    .getAttribute("data-name")
+                    .toLowerCase();
+
+
+                if (
+                    cropName.includes(searchValue)
+                ) {
+
+                    card.style.display =
+                        "block";
+
+                    found = true;
+
+                }
+
+                else {
+
+                    card.style.display =
+                        "none";
+
+                }
+
+            });
+
+
+            /*
+                Show / hide
+                no result message
+            */
+
+            if (found) {
+
+                document.getElementById(
+                    "noResult"
+                ).style.display = "none";
+
+            }
+
+            else {
+
+                document.getElementById(
+                    "noResult"
+                ).style.display = "block";
+
+            }
+
+        }
+
+
+
+        /* =====================================
+           FILTER BY CATEGORY
+        ===================================== */
+
+        function filterCategory(
+            category,
+            button
+        ) {
+
+
+            /*
+                Remove active class
+                from all buttons
+            */
+
+            const buttons =
+                document.querySelectorAll(
+                    ".category-btn"
+                );
+
+
+            buttons.forEach(function(btn) {
+
+                btn.classList.remove(
+                    "active"
+                );
+
+            });
+
+
+            /*
+                Add active class
+                to clicked button
+            */
+
+            button.classList.add(
+                "active"
+            );
+
+
+            /*
+                Clear search
+            */
+
+            document.getElementById(
+                "searchCrop"
+            ).value = "";
+
+
+            const cards =
+                document.querySelectorAll(
+                    ".crop-card"
+                );
+
+
+            let found = false;
+
+
+            cards.forEach(function(card) {
+
+                const cardCategory =
+                    card.getAttribute(
+                        "data-category"
+                    );
+
+
+                if (
+                    category === "all" ||
+                    cardCategory === category
+                ) {
+
+                    card.style.display =
+                        "block";
+
+                    found = true;
+
+                }
+
+                else {
+
+                    card.style.display =
+                        "none";
+
+                }
+
+            });
+
+
+            if (found) {
+
+                document.getElementById(
+                    "noResult"
+                ).style.display = "none";
+
+            }
+
+            else {
+
+                document.getElementById(
+                    "noResult"
+                ).style.display = "block";
+
+            }
+
+        }
+
+    </script>
+
+
+</body>
+
+</html>

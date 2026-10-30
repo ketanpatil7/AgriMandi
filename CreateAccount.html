@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AgriMandi - Farmer Registration</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            background: linear-gradient(135deg, #e8f5e9, #c8e6c9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 15px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background: white;
+            padding: 35px;
+            border-radius: 18px;
+            box-shadow: 0 10px 35px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Logo */
+
+        .logo {
+            text-align: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #2e7d32;
+            margin-bottom: 8px;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 28px;
+        }
+
+        /* Form */
+
+        .form-group {
+            margin-bottom: 18px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 7px;
+            color: #333;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        input {
+            width: 100%;
+            padding: 13px 14px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        input:focus {
+            border-color: #2e7d32;
+            box-shadow: 0 0 0 2px rgba(46, 125, 50, 0.1);
+        }
+
+        /* Location */
+
+        .location-box {
+            display: flex;
+            gap: 8px;
+        }
+
+        .location-box input {
+            flex: 1;
+        }
+
+        .location-btn {
+            width: 50px;
+            border: none;
+            border-radius: 8px;
+            background: #388e3c;
+            color: white;
+            font-size: 20px;
+            cursor: pointer;
+        }
+
+        .location-btn:hover {
+            background: #1b5e20;
+        }
+
+        /* Mobile */
+
+        .mobile-box {
+            display: flex;
+            gap: 8px;
+        }
+
+        .mobile-box input {
+            flex: 1;
+        }
+
+        .verify-btn {
+            padding: 0 15px;
+            border: none;
+            border-radius: 8px;
+            background: #f9a825;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .verify-btn:hover {
+            background: #f57f17;
+        }
+
+        /* OTP */
+
+        .otp-section {
+            display: none;
+            margin-top: 12px;
+        }
+
+        .otp-section input {
+            margin-bottom: 8px;
+        }
+
+        .otp-verify-btn {
+            width: 100%;
+            padding: 11px;
+            border: none;
+            border-radius: 8px;
+            background: #43a047;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .otp-verify-btn:hover {
+            background: #2e7d32;
+        }
+
+        /* Status */
+
+        .status {
+            margin-top: 8px;
+            font-size: 13px;
+        }
+
+        .success {
+            color: #2e7d32;
+        }
+
+        .error {
+            color: #d32f2f;
+        }
+
+        /* Register */
+
+        .register-btn {
+            width: 100%;
+            padding: 14px;
+            margin-top: 8px;
+            border: none;
+            border-radius: 9px;
+            background: #2e7d32;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .register-btn:hover {
+            background: #1b5e20;
+        }
+
+        /* Security */
+
+        .security {
+            margin-top: 18px;
+            padding: 12px;
+            background: #f1f8e9;
+            border-radius: 8px;
+            color: #666;
+            font-size: 12px;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+
+        .footer {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 12px;
+            color: #999;
+        }
+
+        /* Mobile Responsive */
+
+        @media (max-width: 500px) {
+
+            .container {
+                padding: 25px 20px;
+            }
+
+            .mobile-box {
+                flex-direction: column;
+            }
+
+            .verify-btn {
+                padding: 12px;
+            }
+
+        }
+    </style>
+</head>
+
+
+<body>
+
+    <!-- Main Registration Card -->
+
+    <div class="container">
+
+        <!-- Logo -->
+
+        <div class="logo">
+            🌱 AgriMandi
+        </div>
+
+        <div class="subtitle">
+            Smart Mandi Price Comparison for Farmers
+        </div>
+
+
+        <!-- Registration Form -->
+
+        <form id="farmerForm">
+
+            <!-- Farmer Name -->
+
+            <div class="form-group">
+
+                <label for="farmerName">
+                    Farmer Name
+                </label>
+
+                <input
+                    type="text"
+                    id="farmerName"
+                    placeholder="Enter your full name"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Farmer Location -->
+
+            <div class="form-group">
+
+                <label for="location">
+                    Farmer Location
+                </label>
+
+                <div class="location-box">
+
+                    <input
+                        type="text"
+                        id="location"
+                        placeholder="Village / District / State"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="location-btn"
+                        onclick="getLocation()"
+                        title="Detect my location"
+                    >
+                        📍
+                    </button>
+
+                </div>
+
+                <div
+                    id="locationStatus"
+                    class="status">
+                </div>
+
+            </div>
+
+
+            <!-- Mobile Number -->
+
+            <div class="form-group">
+
+                <label for="mobile">
+                    Mobile Number
+                </label>
+
+                <div class="mobile-box">
+
+                    <input
+                        type="tel"
+                        id="mobile"
+                        placeholder="Enter 10-digit mobile number"
+                        maxlength="10"
+                        required
+                    >
+
+                    <button
+                        type="button"
+                        class="verify-btn"
+                        onclick="sendOTP()"
+                    >
+                        Verify
+                    </button>
+
+                </div>
+
+
+                <!-- OTP Section -->
+
+                <div
+                    class="otp-section"
+                    id="otpSection"
+                >
+
+                    <input
+                        type="text"
+                        id="otp"
+                        placeholder="Enter 6-digit OTP"
+                        maxlength="6"
+                    >
+
+                    <button
+                        type="button"
+                        class="otp-verify-btn"
+                        onclick="verifyOTP()"
+                    >
+                        Verify OTP
+                    </button>
+
+                </div>
+
+                <div
+                    id="mobileStatus"
+                    class="status">
+                </div>
+
+            </div>
+
+
+            <!-- Email -->
+
+            <div class="form-group">
+
+                <label for="email">
+                    Email Address
+                </label>
+
+                <input
+                    type="email"
+                    id="email"
+                    placeholder="Enter your email address"
+                    required
+                >
+
+            </div>
+
+
+            <!-- Create Account -->
+
+            <button
+                type="submit"
+                class="register-btn"
+            >
+                Create Farmer Account
+            </button>
+
+
+            <!-- Security Information -->
+
+            <div class="security">
+
+                🔒 <strong>Your information is secure.</strong>
+
+                <br>
+
+                Your details will be used for farmer
+                verification and providing mandi price
+                comparison services.
+
+            </div>
+
+        </form>
+
+
+        <!-- Footer -->
+
+        <div class="footer">
+            © 2026 AgriMandi | Farmer Support Platform
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
+
+    <script>
+
+        /* =========================================
+           VARIABLES
+        ========================================= */
+
+        let generatedOTP = "";
+        let mobileVerified = false;
+
+
+        /* =========================================
+           SEND OTP
+        ========================================= */
+
+        function sendOTP() {
+
+            const mobile =
+                document.getElementById("mobile").value.trim();
+
+            const status =
+                document.getElementById("mobileStatus");
+
+
+            // Validate mobile number
+
+            if (!/^[6-9][0-9]{9}$/.test(mobile)) {
+
+                status.innerHTML =
+                    "❌ Enter a valid 10-digit mobile number.";
+
+                status.className =
+                    "status error";
+
+                return;
+            }
+
+
+            // Generate 6 digit OTP
+
+            generatedOTP =
+                Math.floor(
+                    100000 + Math.random() * 900000
+                ).toString();
+
+
+            // Show OTP box
+
+            document.getElementById("otpSection")
+                .style.display = "block";
+
+
+            // Demo OTP
+
+            status.innerHTML =
+                "📱 Demo OTP: " + generatedOTP;
+
+            status.className =
+                "status";
+
+
+            console.log(
+                "Generated OTP:",
+                generatedOTP
+            );
+
+        }
+
+
+        /* =========================================
+           VERIFY OTP
+        ========================================= */
+
+        function verifyOTP() {
+
+            const enteredOTP =
+                document.getElementById("otp")
+                .value.trim();
+
+            const status =
+                document.getElementById("mobileStatus");
+
+
+            if (enteredOTP === generatedOTP) {
+
+                mobileVerified = true;
+
+                status.innerHTML =
+                    "✓ Mobile number verified successfully.";
+
+                status.className =
+                    "status success";
+
+            }
+
+            else {
+
+                mobileVerified = false;
+
+                status.innerHTML =
+                    "❌ Incorrect OTP. Please try again.";
+
+                status.className =
+                    "status error";
+
+            }
+
+        }
+
+
+        /* =========================================
+           GET CURRENT LOCATION
+        ========================================= */
+
+        function getLocation() {
+
+            const status =
+                document.getElementById("locationStatus");
+
+
+            if (!navigator.geolocation) {
+
+                status.innerHTML =
+                    "❌ Location is not supported by your browser.";
+
+                status.className =
+                    "status error";
+
+                return;
+            }
+
+
+            status.innerHTML =
+                "📍 Detecting your location...";
+
+            status.className =
+                "status";
+
+
+            navigator.geolocation.getCurrentPosition(
+
+                function(position) {
+
+                    const latitude =
+                        position.coords.latitude;
+
+                    const longitude =
+                        position.coords.longitude;
+
+
+                    document.getElementById("location")
+                        .value =
+                        latitude.toFixed(6)
+                        + ", "
+                        + longitude.toFixed(6);
+
+
+                    status.innerHTML =
+                        "✓ Location detected successfully.";
+
+                    status.className =
+                        "status success";
+
+                },
+
+                function() {
+
+                    status.innerHTML =
+                        "❌ Unable to get location. Enter it manually.";
+
+                    status.className =
+                        "status error";
+
+                }
+
+            );
+
+        }
+
+
+        /* =========================================
+           FORM SUBMISSION
+        ========================================= */
+
+        document
+            .getElementById("farmerForm")
+            .addEventListener(
+                "submit",
+                function(event) {
+
+                    event.preventDefault();
+
+
+                    /* Get form values */
+
+                    const name =
+                        document
+                        .getElementById("farmerName")
+                        .value.trim();
+
+                    const location =
+                        document
+                        .getElementById("location")
+                        .value.trim();
+
+                    const mobile =
+                        document
+                        .getElementById("mobile")
+                        .value.trim();
+
+                    const email =
+                        document
+                        .getElementById("email")
+                        .value.trim();
+
+
+                    /* Check mobile verification */
+
+                    if (!mobileVerified) {
+
+                        alert(
+                            "Please verify your mobile number first."
+                        );
+
+                        return;
+                    }
+
+
+                    /* Create farmer object */
+
+                    const farmerData = {
+
+                        name: name,
+
+                        location: location,
+
+                        mobile: mobile,
+
+                        email: email
+
+                    };
+
+
+                    /* Save farmer data */
+
+                    localStorage.setItem(
+                        "farmerData",
+                        JSON.stringify(farmerData)
+                    );
+
+
+                    /* Success message */
+
+                    alert(
+                        "✓ Farmer registration successful!"
+                    );
+
+
+                    /* Go to Page 2 */
+
+                    window.location.href =
+                        "dashboard.html";
+
+                }
+            );
+
+    </script>
+
+</body>
+</html>
